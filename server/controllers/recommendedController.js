@@ -31,7 +31,6 @@ class RecommendedController{
             return axios.get(`http://api.weatherstack.com/current?access_key=f26defb80731d930a4b5c7fd2d0fb0c6&query=${dataCity}`)
         })
         .then(({data}) => {
-            console.log('masuk')
                 let dataWeather = {
                     city: data.location.name,
                     country: data.location.country,
@@ -60,10 +59,9 @@ class RecommendedController{
             // console.log(dataProvinsi)
         })
         .catch(err => {
-            res.status(500).json(err)
+            next(err)
         })
     }
 }
 
 module.exports = RecommendedController
-
