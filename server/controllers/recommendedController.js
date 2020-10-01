@@ -62,45 +62,8 @@ class RecommendedController{
         .catch(err => {
             res.status(500).json(err)
         })
-        // .then(resultcovid=>{
-        //     console.log('masuk')
-        //     console.log(resultcovid)
-        // })
-        // .then(result=>{
-        // console.log('masuk')
-
-        //     let dataProvinsi = {
-        //     }
-        //     console.log('------CEK---------')
-        //     result.data.forEach((val)=>{
-        //         if(val.attributes.Provinsi.includes(dataCity)){
-        //             dataProvinsi = val
-        //         }
-        //     })
-        //     // console.log(dataProvinsi)
-        //     return axios.get(`http://api.weatherstack.com/current?access_key=f26defb80731d930a4b5c7fd2d0fb0c6&query=${dataCity}`)
-        
-        // })
-        // .then(({data}) => {
-        //     let dataWeather = {
-        //         city: data.location.name,
-        //         country: data.location.country,
-        //         localtime: data.location.localtime,
-        //         weather: data.current.weather_descriptions,
-        //         icon: data.current.weather_icons,
-        //         temperature: data.current.temperature
-        //     }
-        //     dataRecommended.weather = dataWeather
-        //     // console.log(dataRecommended)
-        // })
-       
     }
 }
 
 module.exports = RecommendedController
 
-/*
-imageUrl = resultResto.data.restaurants[0].restaurant.featured_image
-name = resultResto.data.restaurants[0].restaurant.name
-location = resultResto.data.restaurants[0].restaurant.location.address
-*/
