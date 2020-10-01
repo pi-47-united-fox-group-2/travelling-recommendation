@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
   ListFood.init({
     name: DataTypes.STRING,
     imageUrl: DataTypes.STRING,
-    location: DataTypes.STRING
+    location: DataTypes.STRING,
+    note:DataTypes.STRING,
+    userId:DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'ListFood',
