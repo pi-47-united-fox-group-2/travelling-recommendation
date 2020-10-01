@@ -1,5 +1,13 @@
-const router = require("express").Router()
+const { route } = require('./listFoodRouter')
+
+const router = require('express').Router()
+const listFoodRouter = require('./listFoodRouter')
 const UserController = require("../controllers/userController")
+
+
+
+router.use('/food',listFoodRouter)
+
 
 // home
 router.get('/', UserController.homeHandler)
