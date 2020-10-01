@@ -3,8 +3,8 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
-
-const port = process.env.PORT
+const port = 3000
+// const port = process.env.PORT
 const routes = require('./routes/index.js')
 
 app.use(cors())
