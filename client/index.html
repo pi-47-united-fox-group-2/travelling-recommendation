@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-signin-client_id" content="236140828689-79oid23hrlgln0nl6sdiqnci4855b2qn.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="236140828689-surnffqg83gbkki93p3qtfcm987m00fj.apps.googleusercontent.com">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>Document</title>
 </head>
@@ -19,24 +19,26 @@
           <div class="navbar-nav">
             <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
             <a class="nav-link" href="#">Your List</a>
-            <a class="nav-link" href="#">Register</a>
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="#" id='btn-register'>Register</a>
+            <a class="nav-link" href="#" id='btn-login'>Login</a>
+            <a class="nav-link" href="#" id='btn-logout'>Logout</a>
           </div>
         </div>
       </nav>
 
 
     <!--LOGIN START-->
-    <div class="container">
-        <form>
+    <div class="container mt-5" id="login-form">
+      <h1>LOGIN</h1>
+        <form onsubmit="login(event)">
             <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            <input type="email" class="form-control" id="emaillogin" aria-describedby="emailHelp">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="password">
+            <input type="password" class="form-control" id="passwordlogin">
             </div>
             <center><button type="submit" class="btn btn-primary">Submit</button></center>
         </form>
@@ -46,23 +48,24 @@
   
     <!--  REGISTRATION FORM   --------------------------------------------------------------------------------------->
     
-    <h1>Sign Up</h1>
-    <div class="before-login container" id="registration-form">
-        <form onsubmit="loginApp(event)">
+    <div class="before-login container mt-5" id="registration-form">
+      <h1>Sign Up</h1>
+        <form onsubmit="register(event)">
             <div class="form-group">
               <label for="email">Email address</label>
-              <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+              <input type="email" class="form-control" id="emailregister" aria-describedby="emailHelp">
               <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" class="form-control" id="password">
+              <input type="password" class="form-control" id="passwordregister">
             </div>
             <button type="submit" class="btn btn-primary">Sign Me Up</button>
         </form>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
 
+    <div class="container" id="afterLogin">
     <!--  WEATHER  --------------------------------------------------------------------------------------->
     <div class="container">
         <h3>Current Weather on your desired destination</h3>
@@ -129,10 +132,8 @@
         </div>
       </div>
     </div>
-
-
-
-
+   </div>
+      
 
 
 <script src="https://apis.google.com/js/platform.js" async defer></script>
