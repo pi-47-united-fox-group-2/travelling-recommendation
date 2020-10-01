@@ -20,9 +20,8 @@ class UserController {
                 })
             })
             .catch(err => {
-                res.status(500).json(err)
+                next(err)
             })
-
     }
 
     static async login(req, res) {
@@ -30,7 +29,7 @@ class UserController {
             email: req.body.email,
             password: req.body.password
         }
-        console.log(input)
+        // console.log(input)
 
         try {
             const user = await User.findOne({
@@ -60,7 +59,7 @@ class UserController {
             }
 
         } catch(err) {
-            res.status(500).json(err)
+            next(err)
         }
 
     }
