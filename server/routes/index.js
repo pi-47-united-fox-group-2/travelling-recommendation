@@ -3,8 +3,7 @@ const { route } = require('./listFoodRouter')
 const router = require('express').Router()
 const listFoodRouter = require('./listFoodRouter')
 const UserController = require("../controllers/userController")
-
-
+const RecommendedController = require("../controllers/recommendedController")
 
 router.use('/food',listFoodRouter)
 
@@ -18,5 +17,6 @@ router.post('/register', UserController.register)
 // login
 router.post('/login', UserController.login)
 
-module.exports = router
+router.get('/recommended', RecommendedController.searchRecommended)
 
+module.exports = router
