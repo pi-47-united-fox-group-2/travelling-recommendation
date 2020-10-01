@@ -1,14 +1,21 @@
-
-
-
-
 function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  console.log('masuk')
+
+  var id_token = googleUser.getAuthResponse().id_token;
+    $.ajax({
+      method:'POST',
+      url:'http://localhost:3000/googlelogin',
+      headers:{
+        google_access_token:id_token
+      }
+    })
+    .then(result=>{
+    })
+    .fail(err=>{
+
+    })
   }
+
 
 $(document).ready(function(){
   if(localStorage.access_token){
@@ -31,6 +38,7 @@ $("#btn-login").click(function(){
 
 $("#btn-logout").click(function(){
   localStorage.removeItem('access_token')
+  localStorage.removeItem('userId')
   beforeLogin()
 })
 
@@ -85,8 +93,30 @@ function login(event){
     data:{email,password}
   })
   .done(result=>{
-    console.log(result,'result login')
+    console.log(result.userId,'result login')
+    localStorage.setItem('userId',result.userId)
     localStorage.setItem('access_token',result.access_token)
     afterLogin()
   })
+}
+
+
+
+function addFoodToList({userId,name,imageUrl,location}){
+  console.log(userId,name,imageUrl,location)
+  $.ajax({
+    method:'POST',
+    url:'http://localhost:3000/food',
+    data:{name,imageUrl,location,userId},
+    headers:{
+      access_token:localStorage.access_token
+    }
+  })
+  .done(result=>{
+    console.log(result)
+  })
+  .fail(error=>{
+    console.log(error)
+  })
+ 
 }
