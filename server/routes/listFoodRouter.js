@@ -1,16 +1,16 @@
-const { route } = require('.')
-
 const router = require('express').Router()
 const {listFoodController} = require('../controllers')
 
+// const authentication = require('../middlewares/authentication.js')
+const authorization = require('../middlewares/authorization.js')
 
-//authentication
+// router.use(authentication)
+
 router.get('/', listFoodController.getListFoodHandler)
 router.post('/', listFoodController.addListFoodHandler)
 
-//authorization
-router.patch('/:id', listFoodController.editListFoodHandler)
-router.delete('/:id', listFoodController.deleteListFoodHandler)
+router.patch('/:id', authorization, listFoodController.editListFoodHandler)
+router.delete('/:id', authorization, listFoodController.deleteListFoodHandler)
 
 
 

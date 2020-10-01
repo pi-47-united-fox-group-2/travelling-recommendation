@@ -1,20 +1,18 @@
 const { ListFood } = require('../models')
 
-
-
 class listFoodController{
 
-    static getListFoodHandler(req,res){
+    static getListFoodHandler(req,res,next){
         ListFood.findAll()
             .then(result=>{
                 res.status(200).json({data:result})
             })
             .catch(err=>{
-                res.status(500).json({message:err})
+                next(err)
             })
     }
 
-    static addListFoodHandler(req,res){
+    static addListFoodHandler(req,res,next){
         // let userId = +req.userData.id
         const {name,imageUrl,location} = req.body
 
@@ -25,12 +23,12 @@ class listFoodController{
                 res.status(201).json({id:result.id,name:result.name,imageUrl:result.imageUrl,location:result.location})
             })
             .catch(err=>{
-                res.status(500).json({message:err})
+                next(err)
             })
     }
 
 
-    static editListFoodHandler(req,res){
+    static editListFoodHandler(req,res,next){
         let id = +req.params.id
         let note = req.body.note
 
@@ -39,13 +37,13 @@ class listFoodController{
                 res.status(200).json({message:result})
             })
             .catch(err=>{
-                res.status(500).json({message:err})
+                next(err)
             })
 
     }
 
 
-    static deleteListFoodHandler(req,res){
+    static deleteListFoodHandler(req,res,next){
         let id = +req.params.id
 
         ListFood.destroy({where:{id}})
@@ -53,7 +51,7 @@ class listFoodController{
                 res.status(200).json({message:'delete successfully'})
             })
             .catch(err=>{
-                res.status(500).json({message:err})
+                next(err)
             })
     }
 
