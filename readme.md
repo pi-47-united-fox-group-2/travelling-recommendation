@@ -278,3 +278,11 @@ _Response (400 - Bad Request)_
   "message": "Invalid Input"
 }
 ```
+
+
+
+/*
+imageUrl = resultResto.data.restaurants[0].restaurant.featured_image
+name = resultResto.data.restaurants[0].restaurant.name
+location = resultResto.data.restaurants[0].restaurant.location.address
+*/
