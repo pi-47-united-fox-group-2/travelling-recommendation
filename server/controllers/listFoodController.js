@@ -14,15 +14,16 @@ class listFoodController{
 
     static addListFoodHandler(req,res,next){
         // let userId = +req.userData.id
-        const {name,imageUrl,location} = req.body
+        const {name,imageUrl,location,userId} = req.body
 
-        const newListFood = {name,imageUrl,location,userId:1,note:'asd'}
+        const newListFood = {name,imageUrl,location,userId,note:''}
 
         ListFood.create(newListFood)
             .then(result=>{
                 res.status(201).json({id:result.id,name:result.name,imageUrl:result.imageUrl,location:result.location})
             })
             .catch(err=>{
+                console.log(err)
                 next(err)
             })
     }

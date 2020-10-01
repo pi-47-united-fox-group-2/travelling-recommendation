@@ -29,7 +29,7 @@
 
     <!--LOGIN START-->
     <div class="container mt-5" id="login-form">
-      <h1>LOGIN</h1>
+      <h1>LOGINN</h1>
         <form onsubmit="login(event)">
             <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
@@ -62,7 +62,6 @@
             </div>
             <button type="submit" class="btn btn-primary">Sign Me Up</button>
         </form>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
 
     <div class="container" id="afterLogin">
@@ -94,15 +93,16 @@
     <div class="container">
     <h3>Foods you can find in the city</h3>
     <div class="row row-cols-1 row-cols-md-2">
-        <div class="col mb-4">
-          <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Nasi Goreng</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <div class="col mb-4">
+            <div class="card">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Nasi Goreng</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
             </div>
+            <button type="button" class="btn btn-primary" onclick="addFoodToList({userId:7,name:'Nasi Goreng',imageUrl:'asdasda',location:'bandung'})">add to wishlist</button>
           </div>
-        </div>
         <div class="col mb-4">
           <div class="card">
             <img src="..." class="card-img-top" alt="...">
