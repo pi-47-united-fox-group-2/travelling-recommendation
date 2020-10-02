@@ -178,3 +178,89 @@ function fetchFoodList() {
       console.log("error", error)
   })
 }
+
+
+function submitCity(event){
+  event.preventDefault()
+  let city = $("#search").val()
+
+  $.ajax({
+    method:'GET',
+    url:`http://localhost:3000/recommended?city=${city}`,
+    headers:{
+      access_token:localStorage.access_token
+    }
+  })
+  .done(result=>{
+    console.log(result)
+    $("#covidcontainer").empty()
+    $("#foodcard").empty()
+    $("#weathercontainer").empty()
+
+    $("#weathercontainer").append(`
+      <h3>Weather on the city</h3>
+      <div class="card mb-4" style="max-width: 520px;">
+          <div class="row no-gutters">
+          <div class="col-md-4 bg-primary" >
+              <img src="${result.weather.icon[0]}" class="card-img" alt="...">
+          </div>
+          <div class="col-md-8">
+              <div class="card-body">
+              <h5 class="card-title">${result.weather.city}, ${result.weather.country}</h5>
+              <p class="card-text">${result.weather.weather[0]}</p>
+              <p class="card-text"><small class="text-muted"><b>Local Time: </b>${result.weather.localtime}</small></p>
+              </div>
+          </div>
+          </div>
+      </div>
+    `)
+
+    
+    $.each(result.food,function(key,value){
+      $("#foodcard").append(`
+      <div class="col mb-4" key=${key}>
+      <div class="card">
+        <img src="${value.restaurant.featured_image}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">${value.restaurant.name}</h5>
+          <p class="card-text">${value.restaurant.location.address}</p>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="addFoodToList({userId:${localStorage.userId},name:'${value.restaurant.name}',imageUrl:'${value.restaurant.featured_image}',location:'${value.restaurant.location.address}'})">add to wishlist</button>
+    </div>
+      `)
+    })
+
+
+    $("#covidcontainer").append(`
+      <h3>Covid Update Negara Indonesia</h3>
+          <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Positif</th>
+                <th scope="col">Sembuh</th>
+                <th scope="col">Meninggal</th>
+                <th scope="col">Dirawat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="font-size: xx-large;">
+                <td>${result.covid[0].positif}</td>
+                <td>${result.covid[0].sembuh}</td>
+                <td>${result.covid[0].meninggal}</td>
+                <td>${result.covid[0].dirawat}</td>
+              </tr>
+            </tbody>
+          </table>
+    `)
+  })
+  .fail(error=>{
+    console.log(error)
+  })
+}
+
+
+
+function fetchRecommend(input){
+
+}
