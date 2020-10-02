@@ -7,26 +7,15 @@ Membuat website untuk memberikan rekomendasi tempat makan, informasi covid, dan 
 &nbsp;
 
 ## RESTful endpoints
-`- POST /register` || userController
+`- POST /register`
 `- POST /login`
 
-`- GET /recommendation` // nampilin semua rekomendasi: covid, food, weather || apiController
+`- GET /recommendation`
 
-`- GET /food` // nampilin list yang udah di add || foodController
-`- POST /food` // nambahin resto makanan
-`- PATCH /food/:id` // ngedit resto
+`- GET /food`
+`- POST /food`
+`- PATCH /food/:id`
 `- DELETE /food/:id`
-
-backend
--dev-login/register
--dev-food
--dev-recommendation
-
-frontend
--dev-homeclient
--dev-login/registerclient
--dev-listfood
-
 
 ### GET /recommendation
 
@@ -74,7 +63,7 @@ _Response (200)_
 [
   {
     "id": 1,
-    "namaResto": "",
+    "name": "",
     "imageUrl": "",
     "lokasi": ""
   }
@@ -103,7 +92,7 @@ _Request Header_
 _Request Body_
 ```json
 {
-    "namaResto": "",
+    "name": "",
     "imageUrl": "",
     "lokasi": "",
     "userId":1
@@ -114,7 +103,7 @@ _Response (201 - Created)_
 ```json
 {
     "id": 1,
-    "namaResto": "",
+    "name": "",
     "imageUrl": "",
     "lokasi": "",
     "userId":1
@@ -150,7 +139,7 @@ _Request Params_
 _Request Body_
 ```json
 {
-    "namaResto": "",
+    "name": "",
     "imageUrl": "",
     "lokasi": "",
     "userId":1
@@ -161,7 +150,7 @@ _Response (200 - OK)_
 ```json
 {
     "id": 1,
-    "namaResto": "",
+    "name": "",
     "imageUrl": "",
     "lokasi": "",
     "userId":1
