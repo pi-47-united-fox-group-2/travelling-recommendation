@@ -18,8 +18,11 @@ function getWeather(location) {
         })
 }
 
-getWeather('Bangkok')
+// getWeather('Bangkok')
 
+
+
+module.exports = getWeather
 
 // API weatherStack
 // f26defb80731d930a4b5c7fd2d0fb0c6

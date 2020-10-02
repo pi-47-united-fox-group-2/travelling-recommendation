@@ -49,6 +49,8 @@ function beforeLogin(){
   $("#btn-logout").hide()
   $("#btn-login").show()
   $("#btn-register").show()
+  $("#search-bar").hide()
+
   $("#myList").hide()
 }
 
@@ -59,6 +61,8 @@ function afterLogin(){
   $("#btn-logout").show()
   $("#btn-login").hide()
   $("#btn-register").hide()
+  $("#search-bar").show()
+
   $("#myList").hide()
 }
 
