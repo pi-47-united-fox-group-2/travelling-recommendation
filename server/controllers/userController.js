@@ -67,17 +67,34 @@ class UserController {
 
 
     static googleLogin(req,res,next){
-        console.log('masuk')
-
+        console.log('masuk googlelogin controller')
+        let emailGoogle
         const client = new OAuth2Client(process.env.CLIENT_ID);
 
         client.verifyIdToken({
             idToken: req.headers.google_access_token,
             audience: process.env.CLIENT_ID
         })
-        .then(payload=>{
+        .then(({payload})=>{
             console.log('masuk')
             console.log(payload)
+            emailGoogle = payload.email
+            return User.findOne({where:{email:emailGoogle}})
+        })
+        .then(resultuser=>{
+            if(!resultuser){
+                var userGoogle={
+                    email:emailGoogle,
+                    password:'123'
+                }
+                return User.create(userGoogle)
+            }else{
+                return resultuser
+            }
+        })
+        .then(user=>{
+            const access_token = signToken({id:user.id,email:user.email})
+            return res.status(201).json({access_token,userId:user.id,message:'berhasil login'})
         })
         .catch(err=>{
             next(err)
