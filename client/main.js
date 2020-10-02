@@ -18,6 +18,12 @@ $("#btn-register").click(function(){
 $("#btn-login").click(function(){
   $("#registration-form").hide()
   $("#login-form").show()
+  
+})
+
+$("#btn-myList").click(function(){
+  $("#myList").show()
+  $("#afterLogin").hide()
 })
 
 function signOutGoogle() {
@@ -35,6 +41,27 @@ $("#btn-logout").click(function(){
   beforeLogin()
 })
 
+function onSignIn(googleUser) {
+  console.log('masukgooglelogin2')
+
+  var id_token = googleUser.getAuthResponse().id_token;
+    $.ajax({
+      method:'POST',
+      url:'http://localhost:3000/googlelogin',
+      headers:{
+        google_access_token:id_token
+      }
+    })
+    .then(result=>{
+      localStorage.setItem('userId',result.userId)
+      localStorage.setItem('access_token',result.access_token)
+    afterLogin()
+    })
+    .fail(err=>{
+      console.log(err)
+    })
+  }
+
 function beforeLogin(){
   $("#login-form").show()
   $("#registration-form").hide()
@@ -42,6 +69,9 @@ function beforeLogin(){
   $("#btn-logout").hide()
   $("#btn-login").show()
   $("#btn-register").show()
+  $("#search-bar").hide()
+
+  $("#myList").hide()
 }
 
 function afterLogin(){
@@ -51,6 +81,9 @@ function afterLogin(){
   $("#btn-logout").show()
   $("#btn-login").hide()
   $("#btn-register").hide()
+  $("#search-bar").show()
+
+  $("#myList").hide()
 }
 
 
@@ -93,8 +126,6 @@ function login(event){
   })
 }
 
-
-
 function addFoodToList({userId,name,imageUrl,location}){
   console.log(userId,name,imageUrl,location)
   $.ajax({
@@ -111,26 +142,39 @@ function addFoodToList({userId,name,imageUrl,location}){
   .fail(error=>{
     console.log(error)
   })
- 
 }
 
-function onSignIn(googleUser) {
-  console.log('masukgooglelogin2')
-
-  var id_token = googleUser.getAuthResponse().id_token;
-    $.ajax({
-      method:'POST',
-      url:'http://localhost:3000/googlelogin',
-      headers:{
-        google_access_token:id_token
+function fetchFoodList() {
+  $.ajax({
+      method: 'GET',
+      url: 'http://localhost:3000/food',
+      headers: {
+          access_token: localStorage.access_token
       }
-    })
-    .then(result=>{
-      localStorage.setItem('userId',result.userId)
-      localStorage.setItem('access_token',result.access_token)
-    afterLogin()
-    })
-    .fail(err=>{
-      console.log(err)
-    })
-  }
+  })
+  .done(result => {
+      console.log(result)
+      Food = result
+      $("#myList").empty()
+      $.each(Food, function(key, value){
+          console.log(value)
+          $("#myList").append(`
+      <div class="col-4 mb-2">
+    <div class="card" style="width: 18rem;">
+      <img src="${value.imageUrl}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">${value.name}</h5>
+        <p class="card-text">${value.location}</p>
+        <p class="card-text">Notes: ${value.notes}</p>
+        <br>
+        <a href="#" class="btn btn-delete">Delete</a>
+      </div>
+    </div>
+  </div>
+  `)
+      })
+  })
+  .fail(err => {
+      console.log("error", error)
+  })
+}

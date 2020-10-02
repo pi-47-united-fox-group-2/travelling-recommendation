@@ -5,23 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-signin-client_id" content="236140828689-surnffqg83gbkki93p3qtfcm987m00fj.apps.googleusercontent.com">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>Document</title>
+    <link rel="stylesheet" href="./custom.css">
+    <title>Food Recommendation</title>
 </head>
 <body>
   
    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Travel Recommendation</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <h1><a class="navbar-brand" href="#" style="color: yellow;">Travel Recommendation</a></h1>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-link" href="#">Your List</a>
-            <a class="nav-link" href="#" id='btn-register'>Register</a>
-            <a class="nav-link" href="#" id='btn-login'>Login</a>
-            <a class="nav-link" href="#" id='btn-logout'>Logout</a>
+            <a class="nav-link active text-white" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link text-white" href="#" id="btn-myList">My List</a>
+            <a class="nav-link text-white" href="#" id='btn-register'>Register</a>
+            <a class="nav-link text-white" href="#" id='btn-login'>Login</a>
+            <a class="nav-link text-white" href="#" id='btn-logout'>Logout</a>
+
           </div>
         </div>
       </nav>
@@ -29,7 +31,7 @@
 
     <!--LOGIN START-->
     <div class="container mt-5" id="login-form">
-      <h1>LOGINN</h1>
+      <h1>Login</h1>
         <form onsubmit="login(event)">
             <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
@@ -66,9 +68,9 @@
 
     <div class="container" id="afterLogin">
 
-    <!-- SEARCH ------------------------------------------->
+    <!-- SEARCH --------------------------------------------------------------------------------------->
 
-    <div class="jumbotron" style="margin-top: 2rem;">
+    <div class="jumbotron after-login" id="search-bar" style="margin-top: 2rem;">
         <br/>
         <div class="row justify-content-center" style="margin-top: 10rem; margin-bottom: 10rem;">
                 <div class="col-12 col-md-10 col-lg-8">
@@ -78,7 +80,7 @@
                                 <i class="fas fa-search h4 text-body"></i>
                             </div>
                             <div class="col">
-                                <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Let's eat somewhere">
+                                <input class="form-control form-control-lg form-control-borderless" id="search" type="search" placeholder="Let's eat somewhere">
                             </div>
                             <div class="col-auto">
                                 <button class="btn btn-lg btn-success" type="submit">Search City</button>
@@ -183,7 +185,23 @@
       </div>
     </div>
    </div>
-      
+
+      <!-- My List -->
+      <div class="container" id="myList">
+        <h3>Foods you selected</h3>
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col mb-4">
+              <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">My Recommendation List</h5>
+                  <button type="button" class="btn btn-warning" name="delete">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       </div>
 
 
 <script src="https://apis.google.com/js/platform.js" async defer></script>
