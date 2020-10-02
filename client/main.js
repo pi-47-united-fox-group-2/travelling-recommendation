@@ -50,8 +50,8 @@ function beforeLogin(){
   $("#btn-login").show()
   $("#btn-register").show()
   $("#search-bar").hide()
-  $("#user-list").hide()
 
+  $("#myList").hide()
 }
 
 function afterLogin(){
@@ -62,7 +62,8 @@ function afterLogin(){
   $("#btn-login").hide()
   $("#btn-register").hide()
   $("#search-bar").show()
-  $("#user-list").show()
+
+  $("#myList").hide()
 }
 
 
@@ -105,8 +106,6 @@ function login(event){
   })
 }
 
-
-
 function addFoodToList({userId,name,imageUrl,location}){
   console.log(userId,name,imageUrl,location)
   $.ajax({
@@ -123,5 +122,43 @@ function addFoodToList({userId,name,imageUrl,location}){
   .fail(error=>{
     console.log(error)
   })
- 
+  
+  $("#btn-myList").click(function(){
+  $("#myList").show()
+  $("#afterLogin").hide()
+})
+
+function fetchFoodList() {
+  $.ajax({
+      method: 'GET',
+      url: 'http://localhost:3000/food',
+      headers: {
+          access_token: localStorage.access_token
+      }
+  })
+  .done(result => {
+      console.log(result)
+      Food = result
+      $("#myList").empty()
+      $.each(Food, function(key, value){
+          console.log(value)
+          $("#myList").append(`
+      <div class="col-4 mb-2">
+    <div class="card" style="width: 18rem;">
+      <img src="${value.imageUrl}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">${value.name}</h5>
+        <p class="card-text">${value.location}</p>
+        <p class="card-text">Notes: ${value.notes}</p>
+        <br>
+        <a href="#" class="btn btn-delete">Delete</a>
+      </div>
+    </div>
+  </div>
+  `)
+      })
+  })
+  .fail(err => {
+      console.log("error", error)
+  })
 }

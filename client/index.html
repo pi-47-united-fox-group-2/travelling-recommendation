@@ -19,10 +19,11 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-link active text-white" href="#">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-link text-white" href="#" id="user-list">Your List</a>
+            <a class="nav-link text-white" href="#" id="btn-myList">My List</a>
             <a class="nav-link text-white" href="#" id='btn-register'>Register</a>
             <a class="nav-link text-white" href="#" id='btn-login'>Login</a>
             <a class="nav-link text-white" href="#" id='btn-logout'>Logout</a>
+
           </div>
         </div>
       </nav>
@@ -184,7 +185,23 @@
       </div>
     </div>
    </div>
-      
+
+      <!-- My List -->
+      <div class="container" id="myList">
+        <h3>Foods you selected</h3>
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col mb-4">
+              <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">My Recommendation List</h5>
+                  <button type="button" class="btn btn-warning" name="delete">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       </div>
 
 
 <script src="https://apis.google.com/js/platform.js" async defer></script>
