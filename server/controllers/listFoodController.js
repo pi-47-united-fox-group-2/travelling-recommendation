@@ -3,7 +3,11 @@ const { ListFood } = require('../models')
 class listFoodController{
 
     static getListFoodHandler(req,res,next){
-        ListFood.findAll()
+        ListFood.findAll({
+            where: {
+                userId: +req.userData.id
+            }
+        })
             .then(result=>{
                 res.status(200).json({data:result})
             })

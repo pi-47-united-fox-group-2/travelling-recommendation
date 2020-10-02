@@ -1,6 +1,5 @@
 
 
-
 $(document).ready(function(){
   if(localStorage.access_token){
     afterLogin()
@@ -22,8 +21,14 @@ $("#btn-login").click(function(){
 })
 
 $("#btn-myList").click(function(){
+  fetchFoodList()
   $("#myList").show()
   $("#afterLogin").hide()
+})
+
+$("#btn-home").click(function(){
+  $("#myList").hide()
+  $("#afterLogin").show()
 })
 
 function signOutGoogle() {
@@ -144,7 +149,44 @@ function addFoodToList({userId,name,imageUrl,location}){
   })
 }
 
-function fetchFoodList() {
+function fetchDelete(input){
+  // console.log(input)
+  $.ajax({
+    method: 'DELETE',
+    url: `http://localhost:3000/food/${input}`,
+    headers: {
+        access_token: localStorage.access_token
+    }
+  })
+  .done(result=>{
+    console.log(result)
+    fetchFoodList()
+  })
+  .fail(err=>{
+    console.log(error, 'error')
+  })
+}
+
+function fetchEdit(id, event,){
+  let note = $("#editdata").val()
+  console.log(note)
+  // $.ajax({
+  //   method: 'PATCH',
+  //   url: `http://localhost:3000/food/${input}`,
+  //   headers: {
+  //       access_token: localStorage.access_token
+  //   }
+  // })
+  // .done(result=>{
+  //   console.log(result)
+  //   fetchFoodList()
+  // })
+  // .fail(err=>{
+  //   console.log(error, 'error')
+  // })
+}
+
+function fetchFoodList(){
   $.ajax({
       method: 'GET',
       url: 'http://localhost:3000/food',
@@ -153,25 +195,29 @@ function fetchFoodList() {
       }
   })
   .done(result => {
-      console.log(result)
-      Food = result
-      $("#myList").empty()
-      $.each(Food, function(key, value){
-          console.log(value)
-          $("#myList").append(`
-      <div class="col-4 mb-2">
-    <div class="card" style="width: 18rem;">
-      <img src="${value.imageUrl}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">${value.name}</h5>
-        <p class="card-text">${value.location}</p>
-        <p class="card-text">Notes: ${value.notes}</p>
-        <br>
-        <a href="#" class="btn btn-delete">Delete</a>
-      </div>
-    </div>
-  </div>
-  `)
+    let Food = result
+    // console.log(Food)
+      $("#myListCard").empty()
+      $.each(Food.data, function(key, value){
+        console.log(value.id)
+          $("#myListCard").append(`
+          <div class="col-4 mb-2" key=${key}>
+            <div class="card" style="width: 18rem;">
+              <img src="${value.imageUrl}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">${value.name}</h5>
+                <p class="card-text">${value.location}</p>
+                <p class="card-text">Notes: ${value.note}</p>
+                <br>
+                <form onsubmit="fetchEdit(${value.id}, event)">
+                <input type="text" class="mb-5" id="editdata">
+                <button class="btn btn-primary">Add Note</button>
+                </form>
+                <button class="btn btn-warning" onClick="fetchDelete(${value.id})">Delete</button>
+              </div>
+            </div>
+          </div>
+        `)
       })
   })
   .fail(err => {
