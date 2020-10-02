@@ -1,20 +1,4 @@
-function onSignIn(googleUser) {
-  console.log('masuk')
 
-  var id_token = googleUser.getAuthResponse().id_token;
-    $.ajax({
-      method:'POST',
-      url:'http://localhost:3000/googlelogin',
-      headers:{
-        google_access_token:id_token
-      }
-    })
-    .then(result=>{
-    })
-    .fail(err=>{
-
-    })
-  }
 
 
 $(document).ready(function(){
@@ -34,13 +18,49 @@ $("#btn-register").click(function(){
 $("#btn-login").click(function(){
   $("#registration-form").hide()
   $("#login-form").show()
+  
 })
+
+$("#btn-myList").click(function(){
+  $("#myList").show()
+  $("#afterLogin").hide()
+})
+
+function signOutGoogle() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+  });
+}
+
 
 $("#btn-logout").click(function(){
   localStorage.removeItem('access_token')
   localStorage.removeItem('userId')
+  signOutGoogle()
   beforeLogin()
 })
+
+function onSignIn(googleUser) {
+  console.log('masukgooglelogin2')
+
+  var id_token = googleUser.getAuthResponse().id_token;
+    $.ajax({
+      method:'POST',
+      url:'http://localhost:3000/googlelogin',
+      headers:{
+        google_access_token:id_token
+      }
+    })
+    .then(result=>{
+      localStorage.setItem('userId',result.userId)
+      localStorage.setItem('access_token',result.access_token)
+    afterLogin()
+    })
+    .fail(err=>{
+      console.log(err)
+    })
+  }
 
 function beforeLogin(){
   $("#login-form").show()
@@ -122,11 +142,7 @@ function addFoodToList({userId,name,imageUrl,location}){
   .fail(error=>{
     console.log(error)
   })
-  
-  $("#btn-myList").click(function(){
-  $("#myList").show()
-  $("#afterLogin").hide()
-})
+}
 
 function fetchFoodList() {
   $.ajax({
