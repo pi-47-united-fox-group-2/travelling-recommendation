@@ -87,6 +87,7 @@ function afterLogin(){
   $("#btn-login").hide()
   $("#btn-register").hide()
   $("#search-bar").show()
+  $("#foodcontainer").hide()
 
   $("#myList").hide()
 }
@@ -203,22 +204,23 @@ function fetchFoodList(){
           $("#myListCard").append(`
           <div class="col-4 mb-2" key=${key}>
             <div class="card" style="width: 18rem;">
-              <img src="${value.imageUrl}" class="card-img-top" alt="...">
+                <img src="${value.imageUrl}" class="card-img-top" alt="..." height="200px">
               <div class="card-body">
                 <h5 class="card-title">${value.name}</h5>
                 <p class="card-text">${value.location}</p>
-                <p class="card-text">Notes: ${value.note}</p>
                 <br>
-                <form onsubmit="fetchEdit(${value.id}, event)">
-                <input type="text" class="mb-5" id="editdata">
-                <button class="btn btn-primary">Add Note</button>
-                </form>
+               
                 <button class="btn btn-warning" onClick="fetchDelete(${value.id})">Delete</button>
               </div>
             </div>
           </div>
         `)
       })
+      // <p class="card-text">Notes: ${value.note}</p>
+      // <form onsubmit="fetchEdit(${value.id}, event)">
+      // <input type="text" class="mb-5" id="editdata">
+      // <button class="btn btn-primary">Add Note</button>
+      // </form>
   })
   .fail(err => {
       console.log("error", error)
@@ -248,7 +250,7 @@ function submitCity(event){
       <div class="card mb-4" style="max-width: 520px;">
           <div class="row no-gutters">
           <div class="col-md-4 bg-primary" >
-              <img src="${result.weather.icon[0]}" class="card-img" alt="...">
+              <img src="${result.weather.icon[0]}" class="card-img" alt="..." >
           </div>
           <div class="col-md-8">
               <div class="card-body">
@@ -266,13 +268,14 @@ function submitCity(event){
       $("#foodcard").append(`
       <div class="col mb-4" key=${key}>
       <div class="card">
-        <img src="${value.restaurant.featured_image}" class="card-img-top" alt="...">
+        <img src="${value.restaurant.featured_image}" class="card-img-top" alt="..." height="300px">
         <div class="card-body">
-          <h5 class="card-title">${value.restaurant.name}</h5>
+          <h5 class="card-title"><b>${value.restaurant.name}</b></h5>
           <p class="card-text">${value.restaurant.location.address}</p>
         </div>
       </div>
-      <button type="button" class="btn btn-primary" onclick="addFoodToList({userId:${localStorage.userId},name:'${value.restaurant.name}',imageUrl:'${value.restaurant.featured_image}',location:'${value.restaurant.location.address}'})">add to wishlist</button>
+      <br>
+      <center><button type="button" class="btn btn-primary" onclick="addFoodToList({userId:${localStorage.userId},name:'${value.restaurant.name}',imageUrl:'${value.restaurant.featured_image}',location:'${value.restaurant.location.address}'})">add to wishlist</button></center>
     </div>
       `)
     })
@@ -299,6 +302,7 @@ function submitCity(event){
             </tbody>
           </table>
     `)
+    $("#foodcontainer").show()
   })
   .fail(error=>{
     console.log(error)
