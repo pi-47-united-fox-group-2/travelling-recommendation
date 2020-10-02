@@ -29,7 +29,7 @@
 
     <!--LOGIN START-->
     <div class="container mt-5" id="login-form">
-      <h1>LOGIN</h1>
+      <h1>LOGINN</h1>
         <form onsubmit="login(event)">
             <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
@@ -62,14 +62,43 @@
             </div>
             <button type="submit" class="btn btn-primary">Sign Me Up</button>
         </form>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
 
     <div class="container" id="afterLogin">
-    <!--  WEATHER  --------------------------------------------------------------------------------------->
+
+    <!-- SEARCH ------------------------------------------->
+
+    <div class="jumbotron" style="margin-top: 2rem;">
+        <br/>
+        <div class="row justify-content-center" style="margin-top: 10rem; margin-bottom: 10rem;">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <form class="card card-sm">
+                        <div class="card-body row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <i class="fas fa-search h4 text-body"></i>
+                            </div>
+                            <div class="col">
+                                <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Let's eat somewhere">
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-lg btn-success" type="submit">Search City</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+
     <div class="container">
-        <h3>Current Weather on your desired destination</h3>
-        <div class="card mb-4" style="max-width: 540px;">
+  
+    </div>
+    
+    <!--  WEATHER  --------------------------------------------------------------------------------------->
+    <div class="row row-cols-1 row-cols-md-2 text-center">
+
+    <div class="container">
+        <h3>Weather on the city</h3>
+        <div class="card mb-4" style="max-width: 520px;">
             <div class="row no-gutters">
             <div class="col-md-4 bg-primary" >
                 <img src="https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0004_black_low_cloud.png" class="card-img" alt="...">
@@ -88,21 +117,42 @@
     <!--  COVID  --------------------------------------------------------------------------------------->
     <div class="container">
         <h3>Covid Update</h3>
+        <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Positif</th>
+                <th scope="col">Sembuh</th>
+                <th scope="col">Meninggal</th>
+                <th scope="col">Dirawat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="font-size: xx-large;">
+                <td>20000</td>
+                <td>19888</td>
+                <td>123</td>
+                <td>12334</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
     </div>
 
     <!--  FOODS  --------------------------------------------------------------------------------------->
     <div class="container">
     <h3>Foods you can find in the city</h3>
     <div class="row row-cols-1 row-cols-md-2">
-        <div class="col mb-4">
-          <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Nasi Goreng</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <div class="col mb-4">
+            <div class="card">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Nasi Goreng</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
             </div>
+            <button type="button" class="btn btn-primary" onclick="addFoodToList({userId:7,name:'Nasi Goreng',imageUrl:'asdasda',location:'bandung'})">add to wishlist</button>
           </div>
-        </div>
         <div class="col mb-4">
           <div class="card">
             <img src="..." class="card-img-top" alt="...">

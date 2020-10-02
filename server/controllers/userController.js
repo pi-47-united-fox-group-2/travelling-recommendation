@@ -1,9 +1,10 @@
 const { User } = require("../models/index")
 const { comparePassword } = require("../helpers/bcrypt")
 const { signToken } = require("../helpers/jwt")
+const { OAuth2Client } = require('google-auth-library')
 
 class UserController {
-    static homeHandler(req, res) {
+    static homeHandler(req, res,next) {
         res.send("Success")
     }
 
@@ -24,7 +25,7 @@ class UserController {
             })
     }
 
-    static async login(req, res) {
+    static async login(req, res, next) {
         const input = {
             email: req.body.email,
             password: req.body.password
@@ -54,7 +55,7 @@ class UserController {
                     email: user.email
                 })
                 res.status(200).json({
-                    access_token
+                    access_token,userId:user.id,message:'berhasil login'
                 })
             }
 
@@ -62,6 +63,25 @@ class UserController {
             next(err)
         }
 
+    }
+
+
+    static googleLogin(req,res,next){
+        console.log('masuk')
+
+        const client = new OAuth2Client(process.env.CLIENT_ID);
+
+        client.verifyIdToken({
+            idToken: req.headers.google_access_token,
+            audience: process.env.CLIENT_ID
+        })
+        .then(payload=>{
+            console.log('masuk')
+            console.log(payload)
+        })
+        .catch(err=>{
+            next(err)
+        })
     }
 
 
